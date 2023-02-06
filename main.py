@@ -2,13 +2,14 @@ import requests
 from typing import Union,List
 import asyncio
 from fastapi import FastAPI
-
+from model_types import RequestBodyType
 
 app = FastAPI()
 
-@app.post('/')
-def get_asset_id():
-    return {"message":"hello world"}
+@app.post('/assetId')
+def get_asset_id(request:RequestBodyType):
+    
+    return {"message":request}
 
 
 
