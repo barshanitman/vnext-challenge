@@ -37,8 +37,8 @@ namespace Vnext.Function
             // string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             // dynamic data = JsonConvert.DeserializeObject(requestBody);
             // name = name ?? data?.name;
-            // object response = await _deviceAsset.GetMultipleAssetIdsAsync(req.devices);
-            object response = await _deviceAsset.GetAssetId("DVID11111");
+            object response = await _deviceAsset.GetMultipleAssetIdsAsync(req.devices);
+            // object response = await _deviceAsset.GetAssetId("DVID11111");
             return new OkObjectResult(response);
 
 

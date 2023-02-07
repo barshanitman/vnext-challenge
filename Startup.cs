@@ -15,7 +15,7 @@ namespace Vnext.Function
         {
             builder.Services.AddTransient<IDeviceAsset, DeviceAsset>();
             builder.Services.AddHttpClient<IDeviceAsset, DeviceAsset>().AddTransientHttpErrorPolicy(
-                policy => policy.OrResult(r => r.StatusCode == HttpStatusCode.BadRequest).WaitAndRetryAsync(5, _ => TimeSpan.FromSeconds(2))
+                policy => policy.OrResult(r => r.StatusCode == HttpStatusCode.BadRequest).WaitAndRetryAsync(5, _ => TimeSpan.FromSeconds(0.5))
 
             );
         }
