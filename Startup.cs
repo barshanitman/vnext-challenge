@@ -1,10 +1,14 @@
 using System;
 using System.Net;
+using System.Reflection;
+using AzureFunctions.Extensions.Swashbuckle;
+using AzureFunctions.Extensions.Swashbuckle.Settings;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Http;
 using Polly;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using Vnext.Function.Entities;
 
 [assembly: FunctionsStartup(typeof(Vnext.Function.Startup))]
@@ -28,6 +32,7 @@ namespace Vnext.Function
             builder.Services.AddDbContext<DeviceContext>(
             options => SqlServerDbContextOptionsExtensions.UseSqlServer(options, connectionString));
             builder.Services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
+
 
 
         }

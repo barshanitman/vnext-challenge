@@ -1,9 +1,12 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 public class Devices
 {
+
+    [Column("DeviceId")]
     [Key]
-    public string DeviceId { get; set; }
+    public string Id { get; set; }
 
     public string Name { get; set; }
 
@@ -11,7 +14,7 @@ public class Devices
 
     public string Type { get; set; }
 
-    public string AssetId { get; set; }
+    public string? AssetId { get; set; } = null;
 
 
 

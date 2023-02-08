@@ -27,6 +27,18 @@ namespace Vnext.Function
             return entity;
         }
 
+        public IEnumerable<TEntity> AddMultiple(IEnumerable<TEntity> entities)
+        {
+            foreach (TEntity entity in entities)
+            {
+                _entities.Add(entity);
+
+
+            }
+
+            return entities;
+        }
+
         public bool EntityExists(int Id)
         {
             throw new NotImplementedException();
@@ -53,10 +65,10 @@ namespace Vnext.Function
             throw new NotImplementedException();
         }
 
-        public async Task<bool> SaveChanges()
+        public void SaveChanges()
         {
 
-            return await _context.SaveChangesAsync().ConfigureAwait(false) > 0;
+            _context.SaveChanges();
 
         }
 

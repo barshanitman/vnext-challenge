@@ -10,7 +10,6 @@ namespace Vnext.Function
     public class DeviceContextFactory : IDesignTimeDbContextFactory<DeviceContext>
     {
 
-
         public DeviceContext CreateDbContext(string[] args)
         {
             string connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");

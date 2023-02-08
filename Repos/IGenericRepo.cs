@@ -15,9 +15,11 @@ namespace Vnext.Function
 
         TEntity Add(TEntity entity);
 
+        IEnumerable<TEntity> AddMultiple(IEnumerable<TEntity> entities);
+
         TEntity UpdateEntity(TEntity entity);
 
-        Task<bool> SaveChanges();
+        void SaveChanges();
 
         Task<TEntity> FindByCondition(Expression<Func<TEntity, bool>> predicate);
         Task<bool> RemoveEntity(int id);
