@@ -1,10 +1,21 @@
+using System.Collections.Generic;
+using System.Net.Http;
 using Xunit;
 
-public class UnitTest1
+namespace Vnext.Function
 {
-    [Fact]
-    public void Test1()
+    public class UnitTest1
+
+
     {
 
+        [Fact]
+        public void Test1()
+        {
+
+            Assert.Equal(4, 4);
+
+        }
     }
+
 }

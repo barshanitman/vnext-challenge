@@ -13,6 +13,7 @@ param sqlDBName string = 'DevicesDB'
 @description('Admin login for sql server')
 param adminLogin string
 
+@secure()
 @description('Admin password for sql server')
 param adminPassword string
 
@@ -32,6 +33,15 @@ resource azSqlDB 'Microsoft.Sql/servers/databases@2022-05-01-preview' = {
   sku: {
     name: 'Standard'
     tier: 'Standard'
+  }
+}
+
+resource sqlServerFirewallRules 'Microsoft.Sql/servers/firewallRules@2021-02-01-preview' = {
+  parent: azSqlServer
+  name: '${envResourceNamePrefix} - IP rules'
+  properties: {
+    startIpAddress: '0.0.0.0'
+    endIpAddress: '255.255.255.255'
   }
 }
 
