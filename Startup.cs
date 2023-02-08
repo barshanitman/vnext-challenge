@@ -22,7 +22,4 @@ namespace Vnext.Function
     }
 
 
-
-
-
 }

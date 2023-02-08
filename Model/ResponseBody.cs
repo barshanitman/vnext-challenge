@@ -7,7 +7,6 @@ namespace Vnext.Function
         public string assetId { get; set; }
 
 
-
     }
 
 
