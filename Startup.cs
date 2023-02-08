@@ -23,9 +23,10 @@ namespace Vnext.Function
                 policy => policy.OrResult(r => r.StatusCode == HttpStatusCode.BadRequest).WaitAndRetryAsync(5, _ => TimeSpan.FromSeconds(0.5))
 
             );
+            string connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
 
             builder.Services.AddDbContext<DeviceContext>(
-            options => SqlServerDbContextOptionsExtensions.UseSqlServer(options, "Server=tcp:in2m5hcujmphc.database.windows.net,1433;Initial Catalog=DevicesDB;Persist Security Info=False;User ID=alohauser;Password=!Aloha27;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
+            options => SqlServerDbContextOptionsExtensions.UseSqlServer(options, connectionString));
             builder.Services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
 
 
