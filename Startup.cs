@@ -6,6 +6,7 @@ using AzureFunctions.Extensions.Swashbuckle.Settings;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using Microsoft.Extensions.Http;
 using Polly;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -19,12 +20,9 @@ namespace Vnext.Function
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
-            builder.Services.AddDbContext<DeviceContext>(
-                       options => options.UseSqlServer("Server=tcp:in2m5hcujmphc.database.windows.net,1433;Initial Catalog=DevicesDB;Persist Security Info=False;User ID=alohauser;Password=!Aloha27;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
-
             builder.Services.AddTransient<IDeviceAsset, DeviceAsset>();
             builder.Services.AddHttpClient<IDeviceAsset, DeviceAsset>().AddTransientHttpErrorPolicy(
-                policy => policy.OrResult(r => r.StatusCode == HttpStatusCode.BadRequest).WaitAndRetryAsync(5, _ => TimeSpan.FromSeconds(0.5))
+                policy => policy.OrResult(r => r.StatusCode == HttpStatusCode.BadRequest).WaitAndRetryAsync(10, _ => TimeSpan.FromSeconds(1))
 
             );
             string connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
@@ -32,6 +30,13 @@ namespace Vnext.Function
             builder.Services.AddDbContext<DeviceContext>(
             options => SqlServerDbContextOptionsExtensions.UseSqlServer(options, connectionString));
             builder.Services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+            // Then all subsequent manual serialization will be done with this setting.
+
+
 
 
 

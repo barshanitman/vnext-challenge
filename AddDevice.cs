@@ -28,7 +28,7 @@ namespace Vnext.Function
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            object response = await _deviceAsset.GetMultipleAssetIdsAsync(req.devices);
+            object response = await _deviceAsset.GetAssetId(req.devices);
             return new OkObjectResult(response);
 
 
