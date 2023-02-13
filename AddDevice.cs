@@ -34,7 +34,6 @@ namespace Vnext.Function
             IEnumerable<Devices> recordsAddedToDatabase = _deviceAsset.AddToDatabase(assignDevicesToAssetIds);
             return new OkObjectResult(recordsAddedToDatabase);
 
-
         }
     }
 }

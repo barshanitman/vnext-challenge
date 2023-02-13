@@ -14,6 +14,14 @@ param sqlDBName string = 'DevicesDB'
 param adminLogin string
 
 @secure()
+@description('AssetId api url ')
+param assetIdApiUrl string = 'http://tech-assessment.vnext.com.au/api/devices/assetId/'
+
+@secure()
+@description('AssetId api x key ')
+param assetIdApiXKey string = 'yeK7CM/Pj2vA3MFpuBxIFX7QIl1cKFOiviZaOjtVCrTq0VUzKeQjfw=='
+
+@secure()
 @description('Admin password for sql server')
 param adminPassword string
 
@@ -83,6 +91,16 @@ resource azFunctionApp 'Microsoft.Web/sites@2022-03-01' = {
         {
           name: 'CONNECTION_STRING'
           value: dbConnectionString
+
+        }
+        {
+          name: 'API-URL'
+          value: assetIdApiUrl
+
+        }
+        {
+          name: 'X-KEY'
+          value: assetIdApiXKey
 
         }
 
