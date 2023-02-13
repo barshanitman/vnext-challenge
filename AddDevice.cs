@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Collections.Generic;
 
 namespace Vnext.Function
 {
@@ -28,8 +29,10 @@ namespace Vnext.Function
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            object response = await _deviceAsset.GetAssetId(req.devices);
-            return new OkObjectResult(response);
+            IEnumerable<ResponseBody> assetIds = await _deviceAsset.GetAssetIdsForDevices(req.devices);
+            IEnumerable<Devices> assignDevicesToAssetIds = _deviceAsset.AssignAssetIdToDevices(req.devices, assetIds);
+            IEnumerable<Devices> recordsAddedToDatabase = _deviceAsset.AddToDatabase(assignDevicesToAssetIds);
+            return new OkObjectResult(recordsAddedToDatabase);
 
 
         }
